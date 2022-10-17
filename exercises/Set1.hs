@@ -20,14 +20,17 @@ import Mooc.Todo
 ------------------------------------------------------------------------------
 -- Ex 1: define variables one and two. They should have type Int and
 -- values 1 and 2, respectively.
-
+one :: Int
+two :: Int
+one = 1
+two = 2
 
 ------------------------------------------------------------------------------
 -- Ex 2: define the function double of type Integer->Integer. Double
 -- should take one argument and return it multiplied by two.
 
 double :: Integer -> Integer
-double x = todo
+double x = 2*x 
 
 ------------------------------------------------------------------------------
 -- Ex 3: define the function quadruple that uses the function double
@@ -35,7 +38,7 @@ double x = todo
 -- four.
 
 quadruple :: Integer -> Integer
-quadruple x = todo
+quadruple x = double (double x)
 
 ------------------------------------------------------------------------------
 -- Ex 4: define the function distance. It should take four arguments of
@@ -50,9 +53,17 @@ quadruple x = todo
 -- Examples:
 --   distance 0 0 1 1  ==>  1.4142135...
 --   distance 1 1 4 5  ==>  5.0
+distance :: Double -> Double -> Double -> Double -> Double
+--distance = ((x1 - y1)^2 + (x2-y2)^2)^1/2
+distance x1 y1 x2 y2 = sqrt( ((x1 - x2)^2 + (y1 - y2)^2))
 
-distance = todo
-
+--distance (-3.0) (-1.0) 4.0 23.0
+--  Expected: 25.0
+--  Was: 182.5
+--distance 1.0 (-1.0) 8.0 23.0
+--  Expected: 25.0
+--  Was: 15.132745950421556
+--
 ------------------------------------------------------------------------------
 -- Ex 5: define the function eeny that returns "eeny" for even inputs
 -- and "meeny" for odd inputs.
