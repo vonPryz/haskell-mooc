@@ -157,11 +157,13 @@ power n k = n * power n (k - 1)
 --   ilog3 2 ==> 1
 --   ilog3 7 ==> 2
 jakaja :: Integer -> Integer
+-- import Debug.Trace
+-- jakaja i = traceShow("i: ", i, "i div 3: ", i `div` 3) i `div` 3
 jakaja i = i `div` 3
 
 ilog3 :: Integer -> Integer
 ilog3 i 
-      | i < 4 = i 
+      | i < 3 = 1 
       | otherwise = 1 + ilog3 (jakaja i)
 
 --postagePrice p
