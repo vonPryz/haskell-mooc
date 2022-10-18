@@ -156,10 +156,15 @@ power n k = n * power n (k - 1)
 -- More examples:
 --   ilog3 2 ==> 1
 --   ilog3 7 ==> 2
+jakaja :: Integer -> Integer
+jakaja i = i `div` 3
 
 ilog3 :: Integer -> Integer
-ilog3 0 = 0
-ilog3 1 = 1
-ilog3 2 = 2
-ilog3 i = ilog3 i-3 `div` 3
+ilog3 i 
+      | i < 4 = i 
+      | otherwise = 1 + ilog3 (jakaja i)
 
+--postagePrice p
+--    | p <= 500 = 250
+--    | p <= 5000 = 300 + p
+--    | otherwise = 6000
