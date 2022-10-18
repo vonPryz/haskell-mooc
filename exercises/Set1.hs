@@ -54,16 +54,8 @@ quadruple x = double (double x)
 --   distance 0 0 1 1  ==>  1.4142135...
 --   distance 1 1 4 5  ==>  5.0
 distance :: Double -> Double -> Double -> Double -> Double
---distance = ((x1 - y1)^2 + (x2-y2)^2)^1/2
 distance x1 y1 x2 y2 = sqrt( ((x1 - x2)^2 + (y1 - y2)^2))
 
---distance (-3.0) (-1.0) 4.0 23.0
---  Expected: 25.0
---  Was: 182.5
---distance 1.0 (-1.0) 8.0 23.0
---  Expected: 25.0
---  Was: 15.132745950421556
---
 ------------------------------------------------------------------------------
 -- Ex 5: define the function eeny that returns "eeny" for even inputs
 -- and "meeny" for odd inputs.
@@ -78,16 +70,25 @@ eeny e = if even e then "eeny" else "meeny"
 -- Modify it so that it accepts two passwords, "swordfish" and
 -- "mellon".
 
+-- This is the simple solution
 checkPassword :: String -> String
 checkPassword password = if password == "swordfish" || password == "mellon"
                          then "You're in."
                          else "ACCESS DENIED!"
 
+-- This works with guards (not introduced yet?)
+--checkPassword password 
+--    | password == "swordfish"  = "You're in."
+--    | password == "mellon" = "You're in."
+--    | otherwise =  "ACCESS DENIED!"
+
+-- This also works. Which one is more haskellish?
 --checkPassword password = if password == "swordfish" 
 --                         then "You're in."
 --                         else if password == "mellon"
 --                         then "You're in."
 --                         else "ACCESS DENIED!"
+
 ------------------------------------------------------------------------------
 -- Ex 7: A postal service prices packages the following way.
 -- Packages that weigh up to 500 grams cost 250 credits.
@@ -103,9 +104,14 @@ postagePrice p = if p <= 500
                  else if p <= 5000
                       then 300 + p 
                       else 6000 
---                 else if p > 5000
---                      then 6000
---                      else 300 + p 
+
+-- Guards solution, much simpler I think
+--postagePrice :: Int -> Int
+--postagePrice p
+--    | p <= 500 = 250
+--    | p <= 5000 = 300 + p
+--    | otherwise = 6000
+
 
 ------------------------------------------------------------------------------
 -- Ex 8: define a function isZero that returns True if it is given an
