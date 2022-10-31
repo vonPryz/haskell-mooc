@@ -16,7 +16,10 @@ import Data.List
 -- Hint! pattern matching is your friend.
 
 binomial :: Integer -> Integer -> Integer
-binomial = todo
+--binomial = todo
+binomial n 0 = 1
+binomial 0 k = 0
+binomial n k = binomial (n-1) k + binomial (n-1) (k-1)
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the odd factorial function. Odd factorial is like
@@ -27,8 +30,11 @@ binomial = todo
 --   oddFactorial 6 ==> 5*3*1 ==> 15
 
 oddFactorial :: Integer -> Integer
-oddFactorial = todo
-
+--oddFactorial = todo
+oddFactorial n
+  | n == 1 = 1
+  | odd n = n * oddFactorial (n-2) 
+  | even n = oddFactorial (n-1)
 ------------------------------------------------------------------------------
 -- Ex 3: implement the Euclidean Algorithm for finding the greatest
 -- common divisor:
@@ -59,8 +65,12 @@ oddFactorial = todo
 -- * https://en.wikipedia.org/wiki/Euclidean_algorithm
 
 myGcd :: Integer -> Integer -> Integer
-myGcd = todo
-
+--myGcd = todo
+myGcd a b 
+  | a == 0 = b
+  | b == 0 = a
+  | a >= b = myGcd (a-b) b 
+  | b > a = myGcd (b-a) a
 ------------------------------------------------------------------------------
 -- Ex 4: Implement the function leftpad which adds space characters
 -- to the start of the string until it is long enough.
@@ -75,7 +85,10 @@ myGcd = todo
 -- * you can compute the length of a string with the length function
 
 leftpad :: String -> Int -> String
-leftpad = todo
+--leftpad = todo
+leftpad xs i
+  | length xs < i = leftpad (" " ++ xs) i
+  | otherwise = xs
 
 ------------------------------------------------------------------------------
 -- Ex 5: let's make a countdown for a rocket! Given a number, you
