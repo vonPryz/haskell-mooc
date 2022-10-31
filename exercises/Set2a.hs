@@ -179,7 +179,38 @@ eitherDiv x y = Right (x `div` y)
 --   addEithers (Left "boom") (Left "fail") ==> Left "boom"
 
 addEithers :: Either String Int -> Either String Int -> Either String Int
-addEithers (Left str) b = Left str
-addEithers (Right str) b = Right str
-addEithers (Right a) (Right b) =  (Right a) + (Right b) 
+
+-- addEithers (Left a) _ = Left("First argument was a string: "  ++ a) 
+-- addEithers (Left a) _ = Left("First argument was a string: "  ++ a) 
+addEithers (Left a) _ = Left(a) 
+addEithers _ (Left b) = Left(b)
+
+addEithers (Right a) (Right b) = Right a + Right b
+
+--    • Data constructor not in scope: Num :: Int -> Either String Int
+--    • Perhaps you meant variable ‘sum’ (imported from Data.List)
+-- addEithers (Right a) (Right b) = (Num a) + (Num b)
+
+
+--addEithers (Right a) (Right b) = a + b
+
+--     • Couldn't match expected type ‘Either String Int’
+--                  with actual type ‘Int’
+-- addEithers (Right a) (Right b) = a + b 
+
+--     • No instance for (Num (Either String Int))
+--        arising from a use of ‘+’
+-- addEithers (Right a) (Right b) = Right a + Right b 
+
+--     • No instance for (Num (Either String Int))
+--        arising from a use of ‘+’
+-- addEithers (Right a) (Right b) = (Right a) + (Right b)
+
+--     • Couldn't match expected type ‘Either String Int’
+--                  with actual type ‘Maybe Int’
+-- addEithers (Right a) (Right b) = (Just a) + (Just b)
+
+--     • Couldn't match expected type ‘Either String Int’
+--                  with actual type ‘Maybe (Either a0 Int)’
+-- addEithers (Right a) (Right b) = Just (Right a) + (Just (Right b))
 
