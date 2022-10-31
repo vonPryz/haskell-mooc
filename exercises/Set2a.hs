@@ -179,13 +179,11 @@ eitherDiv x y = Right (x `div` y)
 --   addEithers (Left "boom") (Left "fail") ==> Left "boom"
 
 addEithers :: Either String Int -> Either String Int -> Either String Int
-
--- addEithers (Left a) _ = Left("First argument was a string: "  ++ a) 
--- addEithers (Left a) _ = Left("First argument was a string: "  ++ a) 
 addEithers (Left a) _ = Left(a) 
 addEithers _ (Left b) = Left(b)
+addEithers (Right a) (Right b) = Right(a + b)
 
-addEithers (Right a) (Right b) = Right a + Right b
+-- This was pretty hard to get right. Looks like Right() returns an Either and that's what was required.
 
 --    • Data constructor not in scope: Num :: Int -> Either String Int
 --    • Perhaps you meant variable ‘sum’ (imported from Data.List)
