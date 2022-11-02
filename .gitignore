@@ -4,3 +4,4 @@
 score.json
 *.swp
 *.??~
+.DS_Store
