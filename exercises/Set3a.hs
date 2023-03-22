@@ -27,8 +27,12 @@ import Data.List
 --  maxBy length [1,2,3] [4,5]  ==>  [1,2,3]
 --  maxBy head   [1,2,3] [4,5]  ==>  [4,5]
 
+--maxBy measure a b = todo
 maxBy :: (a -> Int) -> a -> a -> a
-maxBy measure a b = todo
+maxBy f a b
+    | f a > f b = a
+    | otherwise = b
+
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the function mapMaybe that takes a function and a
