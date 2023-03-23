@@ -84,13 +84,34 @@ mapMaybe2 f (Just x) (Just y) = Just(f x y)
 -- annotations.
 --
 -- Note! Do not change the definition of palindromeHalfs
-
+-- :{
 palindromeHalfs :: [String] -> [String]
 palindromeHalfs xs = map firstHalf (filter palindrome xs)
 
-firstHalf = todo
+palindrome :: String -> Bool
+palindrome xs
+    | xs == reverse xs = True
+    | otherwise = False
 
-palindrome = todo
+firstHalf :: String -> String
+firstHalf s = 
+    if slen <2
+    then 
+        s
+    else
+        take midpoint s
+        
+    where 
+        slen = length s
+        midpoint = 
+            if mod 2 slen == 0
+            then
+                div slen 2
+            else
+                div (1+slen) 2
+-- :}
+-- firstHalf = todo
+-- palindrome = todo
 
 ------------------------------------------------------------------------------
 -- Ex 5: Implement a function capitalize that takes in a string and
