@@ -128,8 +128,19 @@ firstHalf s =
 -- Example:
 --   capitalize "goodbye cruel world" ==> "Goodbye Cruel World"
 
+--capitalize = todo
+-- :{
 capitalize :: String -> String
-capitalize = todo
+capitalize s = 
+    unwords $ map capitalizeFirst (words s)
+
+capitalizeFirst :: String -> String
+capitalizeFirst s = 
+      [h] ++ t
+  where
+      t = tail s
+      h = toUpper $ head s
+-- :}
 
 ------------------------------------------------------------------------------
 -- Ex 6: powers k max should return all the powers of k that are less
