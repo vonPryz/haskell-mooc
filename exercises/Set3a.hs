@@ -177,8 +177,12 @@ powList x = iterate (*x) 1
 --   in while check tail "xyzAvvt"
 --     ==> Avvt
 
+-- while check update value = todo
 while :: (a->Bool) -> (a->a) -> a -> a
-while check update value = todo
+while check update value =
+    if check value == False
+    then value 
+    else while check update (update value)
 
 ------------------------------------------------------------------------------
 -- Ex 8: another version of a while loop. This time, the check
