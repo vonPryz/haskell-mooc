@@ -229,8 +229,41 @@ bomb x = Right (x-1)
 --
 -- Hint! This is a great use for list comprehensions
 
-joinToLength :: Int -> [String] -> [String]
-joinToLength = todo
+-- joinToLength = todo
+-- Jokaiselle elementille testi, onko
+-- a) oikean kokoinen vai
+-- b) liian lyhyt
+-- Jos a) käy sellaisenaan
+-- Jos b) laske findPadLength -funktiolla miten paljon päddingiä tarvitaan
+-- ja hae findByLengthillä sopivat elementit
+-- ja joinaa ne
+
+:{
+joinToLength :: Int -> [String] -> [String] 
+joinToLength n xs =
+    map (f n) xs
+
+f :: Int -> String -> String
+f n x =
+    if length x == n
+    then x
+    else 
+        show (findPadLength n x)
+
+--    map (x++) suffixes
+--    where
+--        padLen = findPadLength n xs
+--        suffixes = findByLength padLen xs
+--
+-- Find out how many pad characters are needed
+findPadLength :: Int -> String -> Int
+findPadLength n xs = n - length xs
+
+-- Filter list to get strings of length n 
+findByLength:: Int -> [String] -> [String]
+findByLength n xs = [s | s <- xs, length s == n]
+
+:}
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the operator +|+ that returns a list with the first
