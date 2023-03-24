@@ -95,20 +95,14 @@ palindrome xs
 
 firstHalf :: String -> String
 firstHalf s = 
-    if slen <2
-    then 
-        s
-    else
-        take midpoint s
-        
+    take midpoint s
     where 
         slen = length s
-        midpoint = 
-            if mod 2 slen == 0
-            then
-                div slen 2
-            else
-                div (1+slen) 2
+        midpoint =
+            if even slen
+            then div slen 2
+            else div (slen +1) 2
+
 -- :}
 -- firstHalf = todo
 -- palindrome = todo
