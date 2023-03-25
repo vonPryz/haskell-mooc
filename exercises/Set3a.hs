@@ -248,7 +248,11 @@ f n x =
     if length x == n
     then x
     else 
-        show (findPadLength n x)
+        show(pl)
+        where
+            pl = findPadLength n x
+-- suffixes = findByLength pl x
+--        show (findPadLength n x)
 
 --    map (x++) suffixes
 --    where
@@ -262,8 +266,8 @@ findPadLength n xs = n - length xs
 -- Filter list to get strings of length n 
 findByLength:: Int -> [String] -> [String]
 findByLength n xs = [s | s <- xs, length s == n]
-
 :}
+joinToLength 4 ["a","b","cd","def"]
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the operator +|+ that returns a list with the first
