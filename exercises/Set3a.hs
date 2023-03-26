@@ -230,44 +230,27 @@ bomb x = Right (x-1)
 -- Hint! This is a great use for list comprehensions
 
 -- joinToLength = todo
--- Jokaiselle elementille testi, onko
--- a) oikean kokoinen vai
--- b) liian lyhyt
--- Jos a) käy sellaisenaan
--- Jos b) laske findPadLength -funktiolla miten paljon päddingiä tarvitaan
--- ja hae findByLengthillä sopivat elementit
--- ja joinaa ne
 
-:{
+-- -- Filter list to get strings of length n 
+-- findByLength:: Int -> [String] -> [String]
+-- findByLength n xs = [s | s <- xs, length s == n]
+-- properLengthStrings ++ map show paddingNeeded ++ tooShortStrings
 joinToLength :: Int -> [String] -> [String] 
+:{
+joinToLength :: Int -> [String] -> [(String, Int, Int)] 
 joinToLength n xs =
-    map (f n) xs
+    let
+        -- Find out good elements 
+        properLengthStrings = [s | s <- xs, length s == n]
+        tooShortStrings = map (createShortTuples n) xs 
+    in
+        tooShortStrings 
 
-f :: Int -> String -> String
-f n x =
-    if length x == n
-    then x
-    else 
-        show(pl)
-        where
-            pl = findPadLength n x
--- suffixes = findByLength pl x
---        show (findPadLength n x)
+createShortTuples :: Int -> String -> (String, Int, Int)
+createShortTuples n s = (s, n - length s, length s)
 
---    map (x++) suffixes
---    where
---        padLen = findPadLength n xs
---        suffixes = findByLength padLen xs
---
--- Find out how many pad characters are needed
-findPadLength :: Int -> String -> Int
-findPadLength n xs = n - length xs
-
--- Filter list to get strings of length n 
-findByLength:: Int -> [String] -> [String]
-findByLength n xs = [s | s <- xs, length s == n]
 :}
-joinToLength 4 ["a","b","cd","def"]
+joinToLength 4 ["a","b","cd","def","abdc"]
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the operator +|+ that returns a list with the first
