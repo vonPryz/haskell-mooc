@@ -261,8 +261,13 @@ joinToLength n xs =
 --   [1,2,3] +|+ [4,5,6]  ==> [1,4]
 --   [] +|+ [True]        ==> [True]
 --   [] +|+ []            ==> []
-
-
+-- :{
+(+|+) :: [a] -> [a] -> [a]
+[] +|+ [] = []
+[] +|+ ys = head ys : []
+xs +|+ [] = head xs : [] 
+xs +|+ ys = head xs : head ys : []
+-- :}
 ------------------------------------------------------------------------------
 -- Ex 11: remember the lectureParticipants example from Lecture 2? We
 -- used a value of type [Either String Int] to store some measurements
