@@ -230,27 +230,25 @@ bomb x = Right (x-1)
 -- Hint! This is a great use for list comprehensions
 
 -- joinToLength = todo
-
--- -- Filter list to get strings of length n 
--- findByLength:: Int -> [String] -> [String]
--- findByLength n xs = [s | s <- xs, length s == n]
--- properLengthStrings ++ map show paddingNeeded ++ tooShortStrings
 joinToLength :: Int -> [String] -> [String] 
-:{
-joinToLength :: Int -> [String] -> [(String, Int, Int)] 
 joinToLength n xs =
     let
-        -- Find out good elements 
-        properLengthStrings = [s | s <- xs, length s == n]
-        tooShortStrings = map (createShortTuples n) xs 
+        cartesianStrings = createCartesian xs xs
+        properLengthStrings = [s | s <- cartesianStrings, length s == n] 
     in
-        tooShortStrings 
+       properLengthStrings 
+    where
+        createCartesian :: [String] -> [String] -> [String]
+        createCartesian xs ys =  [x++y | x <- xs, y <- ys]
 
-createShortTuples :: Int -> String -> (String, Int, Int)
-createShortTuples n s = (s, n - length s, length s)
+-- This was pretty tricky; my first attempts were about to get lists of
+-- too short strings, calculating suitable matches based on string length and
+-- desired length and stuff.
+-- Then I realized that let's just make a cartesian product of all the inputs
+-- and remove no good elements. This likely isn't that efficient, but we could,
+-- say, for large datasets generate AxB for elements that are known to result
+-- in strings that aren't too long. Also, filtering the input set might be useful.
 
-:}
-joinToLength 4 ["a","b","cd","def","abdc"]
 
 ------------------------------------------------------------------------------
 -- Ex 10: implement the operator +|+ that returns a list with the first
