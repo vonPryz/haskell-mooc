@@ -282,6 +282,7 @@ xs +|+ ys = head xs : head ys : []
 --   sumRights [Right 1, Left "bad value", Right 2]  ==>  3
 --   sumRights [Left "bad!", Left "missing"]         ==>  0
 
+-- sumRights = todo
 sumRights :: [Either a Int] -> Int
 sumRights = todo
 
@@ -354,5 +355,24 @@ multiApp = todo
 -- using (:). If you build the list in an argument to a helper
 -- function, the surprise won't work.
 
+--interpreter commands = todo
+:{
 interpreter :: [String] -> [String]
-interpreter commands = todo
+interpreter commands = parse commands 0 0 []
+
+parse :: [String] -> Int -> Int -> [Int] -> [String]
+parse [] x0 y0 z = map show z 
+parse (x:xs) x0 y0 z =  
+    case x of
+        "up"     -> parse xs (x0 + 1) y0 z
+        "down"   -> parse xs (x0 - 1) y0 z
+        "left"   -> parse xs x0 (y0 - 1) z
+        "right"  -> parse xs x0 (y0 + 1) z
+        "printX" -> parse xs x0 y0 (z ++ [x0])
+        "printY" -> parse xs x0 y0 (z ++ [y0])
+        _        -> map show (z : [])
+:}
+
+interpreter ["up","up","up","printY","down","printY"]
+
+
