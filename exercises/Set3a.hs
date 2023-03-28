@@ -356,23 +356,23 @@ multiApp = todo
 -- function, the surprise won't work.
 
 --interpreter commands = todo
-:{
+-- :{
 interpreter :: [String] -> [String]
 interpreter commands = parse commands 0 0 []
 
 parse :: [String] -> Int -> Int -> [Int] -> [String]
-parse [] x0 y0 z = map show z 
-parse (x:xs) x0 y0 z =  
-    case x of
-        "up"     -> parse xs (x0 + 1) y0 z
-        "down"   -> parse xs (x0 - 1) y0 z
-        "left"   -> parse xs x0 (y0 - 1) z
-        "right"  -> parse xs x0 (y0 + 1) z
-        "printX" -> parse xs x0 y0 (z ++ [x0])
-        "printY" -> parse xs x0 y0 (z ++ [y0])
+parse [] x y z = map show z 
+parse (xx:xs) x y z =  
+    case xx of
+        "up"  -> parse xs x (y + 1) z
+        "down"   -> parse xs x (y - 1) z
+        "left"   -> parse xs (x - 1) y z
+        "right"     -> parse xs (x + 1) y z
+        "printX" -> parse xs x y (z ++ [x])
+        "printY" -> parse xs x y (z ++ [y])
         _        -> map show (z : [])
-:}
+-- :}
 
-interpreter ["up","up","up","printY","down","printY"]
+-- interpreter ["up","up","up","printY","down","printY"]
 
 
