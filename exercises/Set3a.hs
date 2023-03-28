@@ -304,7 +304,22 @@ sumRights (x:xs) =
 --   multiCompose [(3*), (2^), (+1)] 0 ==> 6
 --   multiCompose [(+1), (2^), (3*)] 0 ==> 2
 
-multiCompose fs = todo
+
+--multiCompose fs = todo
+multiCompose :: [(a -> a)] -> a -> a
+multiCompose [] x = x
+--multiCompose (f:fs) x = multiCompose fs (f x) 
+multiCompose fs x = multiCompose' (reverse fs) x
+
+multiCompose' :: [(a -> a)] -> a -> a
+multiCompose' [] x = x
+multiCompose' (f:fs) x = multiCompose' fs (f x) 
+
+-- This is weird. The results work only if function list is reversed,
+-- but that's not what I understood from the textual description;
+-- "compose them in the same order than they appear" means, to me,
+-- to apply each operator from left to right. Now tests assume
+-- that right to left is the right (ha ha) way.
 
 ------------------------------------------------------------------------------
 -- Ex 13: let's consider another way to compose multiple functions. Given
