@@ -284,7 +284,11 @@ xs +|+ ys = head xs : head ys : []
 
 -- sumRights = todo
 sumRights :: [Either a Int] -> Int
-sumRights = todo
+sumRights [] = 0
+sumRights (x:xs) =
+    case x of
+        Right i -> i + sumRights xs
+        Left _  -> sumRights xs
 
 ------------------------------------------------------------------------------
 -- Ex 12: recall the binary function composition operation
