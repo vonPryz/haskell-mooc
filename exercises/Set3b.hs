@@ -38,8 +38,25 @@ import Mooc.Todo
 --   buildList 1 5 2 ==> [1,1,1,1,1,2]
 --   buildList 7 0 3 ==> [3]
 
+-- buildList start count end = todo
+-- buildList start count end = (replicate count start) ++ [end]
+-- :{
 buildList :: Int -> Int -> Int -> [Int]
-buildList start count end = todo
+buildList start count end = buildList' i howMany lastValue []
+    where
+        i = start
+        howMany = count
+        lastValue = end
+
+buildList' :: Int -> Int -> Int -> [Int] -> [Int] 
+buildList' i howMany lastValue xs
+    | howMany > 0 = buildList' i (howMany -1) lastValue (appender xs i)
+    | otherwise = appender xs lastValue 
+    where
+        appender :: [Int] -> Int -> [Int]
+        appender [] y = [y]
+        appender (x:xs) y = x : appender xs y
+-- :}
 
 ------------------------------------------------------------------------------
 -- Ex 2: given i, build the list of sums [1, 1+2, 1+2+3, .., 1+2+..+i]
