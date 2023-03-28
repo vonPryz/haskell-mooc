@@ -340,7 +340,10 @@ multiCompose' (f:fs) x = multiCompose' fs (f x)
 --   multiApp id [head, (!!2), last] "axbxc" ==> ['a','b','c'] i.e. "abc"
 --   multiApp sum [head, (!!2), last] [1,9,2,9,3] ==> 6
 
-multiApp = todo
+-- multiApp = todo
+multiApp f gs x :: (a -> a) -> [(a -> a] -> a
+multiApp f [] x = [] 
+multiApp f (g:gs) x = 
 
 ------------------------------------------------------------------------------
 -- Ex 14: in this exercise you get to implement an interpreter for a
