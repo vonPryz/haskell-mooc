@@ -67,6 +67,8 @@ buildList' i howMany lastValue xs
 
 sums :: Int -> [Int]
 sums i = todo
+--sums i = 
+
 
 ------------------------------------------------------------------------------
 -- Ex 3: define a function mylast that returns the last value of the
@@ -80,7 +82,21 @@ sums i = todo
 --   mylast 0 [1,2,3] ==> 3
 
 mylast :: a -> [a] -> a
-mylast def xs = todo
+-- mylast def xs = todo
+myLast def [] = def
+mylast def xs = getHead ( reverser xs )
+
+    where
+        appender :: [a] -> a -> [a]
+        appender [] y = [y]
+        appender (x:xs) y = x : appender xs y
+
+        reverser :: [a] -> [a]
+        reverser [] = []
+        reverser (x:xs) = reverser ( appender xs x)
+
+        getHead :: [a] -> a
+        getHead (x:_) = x
 
 ------------------------------------------------------------------------------
 -- Ex 4: safe list indexing. Define a function indexDefault so that
