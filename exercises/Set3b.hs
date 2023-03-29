@@ -65,11 +65,18 @@ buildList' i howMany lastValue xs
 --
 -- Ps. you'll probably need a recursive helper function
 
+-- sums i = todo
+
 sums :: Int -> [Int]
-sums i = todo
---sums i = 
+sums i = 
+    sums' 1 i 1 []
+    where
+        sums' :: Int -> Int -> Int -> [Int] -> [Int]
+        sums' min max current xs  
+            | current <= max = current : sums' min max (current+1) xs 
+            | otherwise = xs
 
-
+            -- | current <= max = current+xs!!current-1 : sums' min max (current+1) xs 
 ------------------------------------------------------------------------------
 -- Ex 3: define a function mylast that returns the last value of the
 -- given list. For an empty list, a provided default value is
@@ -80,24 +87,25 @@ sums i = todo
 -- Examples:
 --   mylast 0 [] ==> 0
 --   mylast 0 [1,2,3] ==> 3
+-- mylast def xs = todo
 
 mylast :: a -> [a] -> a
--- mylast def xs = todo
 myLast def [] = def
-mylast def xs = getHead ( reverser xs )
+-- mylast def xs = getHead ( reverser xs )
+mylast def xs = getHead xs 
 
     where
-        appender :: [a] -> a -> [a]
-        appender [] y = [y]
-        appender (x:xs) y = x : appender xs y
-
-        reverser :: [a] -> [a]
-        reverser [] = []
-        reverser (x:xs) = reverser ( appender xs x)
-
         getHead :: [a] -> a
         getHead (x:_) = x
 
+        reverser :: [a] -> [a]  
+        reverser [] = []  
+        reverser (x:xs) = reverser (appender xs x )
+
+        appender :: [a] -> a -> [a]
+        appender [] y = y:[]
+        appender (x:xs) y = x : appender xs y
+-- :}
 ------------------------------------------------------------------------------
 -- Ex 4: safe list indexing. Define a function indexDefault so that
 --   indexDefault xs i def
