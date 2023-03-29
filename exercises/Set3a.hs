@@ -339,14 +339,18 @@ multiCompose' (f:fs) x = multiCompose' fs (f x)
 --   multiApp concat [take 3, reverse] "race" ==> "racecar"
 --   multiApp id [head, (!!2), last] "axbxc" ==> ['a','b','c'] i.e. "abc"
 --   multiApp sum [head, (!!2), last] [1,9,2,9,3] ==> 6
-
+multiApp f gs x = f (map ($ x) gs)
+{-   
 multiApp = todo
--- :{
--- multiApp :: (a -> a) -> [(a -> a)] -> a -> [a]
--- multiApp f [] x = [] 
--- multiApp f (g:gs) x = g x : multiApp f gs (f x)
--- :}
-
+:{
+multiApp :: ([a] -> [a]) -> [(a -> a)] -> a -> [a]
+multiApp f [] x = [] 
+multiApp f gs x = 
+    f h
+    where
+        h = [g' x | g' <- gs]
+:}
+-}  
 ------------------------------------------------------------------------------
 -- Ex 14: in this exercise you get to implement an interpreter for a
 -- simple language. You should keep track of the x and y coordinates,
