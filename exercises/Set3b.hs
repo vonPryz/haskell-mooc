@@ -69,13 +69,25 @@ buildList' i howMany lastValue xs
 
 sums :: Int -> [Int]
 sums i = 
-    sums' 1 i 1 []
-    where
-        sums' :: Int -> Int -> Int -> [Int] -> [Int]
-        sums' min max current xs  
-            | current <= max = current : sums' min max (current+1) xs 
-            | otherwise = xs
 
+    sums' i 1 []
+    where
+        sums' :: Int -> Int -> [Int] -> [Int]
+        sums' maxval current xs 
+            | current <= maxval = prev : sums' maxval nextval xs
+            | otherwise = xs
+            where
+                nextval = current+1
+                prev = div (current*nextval) 2 
+
+--    sums' 1 i 1 []
+--    where
+--        sums' :: Int -> Int -> Int -> [Int] -> [Int]
+--        sums' min max current xs  
+--            | current <= max = current : sums' min max (current+1) xs 
+--            | otherwise = xs
+
+-- 1, 3, 6, 10, 15, 21
             -- | current <= max = current+xs!!current-1 : sums' min max (current+1) xs 
 ------------------------------------------------------------------------------
 -- Ex 3: define a function mylast that returns the last value of the
