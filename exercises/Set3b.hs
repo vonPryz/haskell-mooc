@@ -91,20 +91,14 @@ sums i =
 
 mylast :: a -> [a] -> a
 myLast def [] = def
--- mylast def xs = getHead ( reverser xs )
-mylast def xs = getHead xs 
+mylast def xs = getLast def xs 
 
     where
-        getHead :: [a] -> a
-        getHead (x:_) = x
+        getLast :: a -> [a] -> a
+        getLast def [] = def
+        getLast def [x] = x
+        getLast def (_:xs) = getLast def xs
 
-        reverser :: [a] -> [a]  
-        reverser [] = []  
-        reverser (x:xs) = reverser (appender xs x )
-
-        appender :: [a] -> a -> [a]
-        appender [] y = y:[]
-        appender (x:xs) y = x : appender xs y
 -- :}
 ------------------------------------------------------------------------------
 -- Ex 4: safe list indexing. Define a function indexDefault so that
