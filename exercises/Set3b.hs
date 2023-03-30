@@ -80,15 +80,11 @@ sums i =
                 nextval = current+1
                 prev = div (current*nextval) 2 
 
---    sums' 1 i 1 []
---    where
---        sums' :: Int -> Int -> Int -> [Int] -> [Int]
---        sums' min max current xs  
---            | current <= max = current : sums' min max (current+1) xs 
---            | otherwise = xs
+-- Here the key was to look up triangular nubmers formula from oeis.org
+-- and calculate the values one by one.
+-- First attempt of generating a list of 1,2,3,...i-1,i] wasn't summable
+-- in easy enough a form.
 
--- 1, 3, 6, 10, 15, 21
-            -- | current <= max = current+xs!!current-1 : sums' min max (current+1) xs 
 ------------------------------------------------------------------------------
 -- Ex 3: define a function mylast that returns the last value of the
 -- given list. For an empty list, a provided default value is
@@ -164,9 +160,28 @@ indexDefault xs i def
 --   sorted [1,3,2] ==> False
 --   sorted [7,2,7] ==> False
 
-sorted :: [Int] -> Bool
-sorted xs = todo
+-- sorted xs = todo
 
+sorted :: [Int] -> Bool
+sorted [] = True 
+sorted xs = checkList xs (getListLength xs 0)
+    where
+        checkList :: [Int] -> Int -> Bool
+        checkList [] 0 = True
+        checkList [] _ = False
+        checkList [x] _ = True
+        checkList (x:y:xs) i = 
+            if x <= y 
+            then 
+                checkList (y:xs) (i+1) 
+            else 
+                False
+
+        getListLength :: [a] -> Int -> Int
+        getListLength [] 0 = 0
+        getListLength [] i = i
+        getListLength (x:xs) i = getListLength xs (i+1)
+           
 ------------------------------------------------------------------------------
 -- Ex 6: compute the partial sums of the given list like this:
 --
