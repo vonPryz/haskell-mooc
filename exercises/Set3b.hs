@@ -115,8 +115,29 @@ mylast def xs = getLast def xs
 --   indexDefault [10,20,30] 3 7         ==>  7
 --   indexDefault ["a","b","c"] (-1) "d" ==> "d"
 
+-- indexDefault xs i def = todo
+
 indexDefault :: [a] -> Int -> a -> a
-indexDefault xs i def = todo
+indexDefault xs i def
+    | i > getListLength xs 0 = def
+    | i < 0 = def
+    | otherwise = getElementAt xs i 0 def
+
+    where
+        getElementAt :: [a] -> Int -> Int -> a -> a
+        getElementAt [x] i idx def = 
+            if i == idx 
+            then x 
+            else def 
+        getElementAt (x:xs) i idx def
+            | i == idx = x
+            | otherwise = getElementAt xs i (idx+1) def
+        
+        getListLength :: [a] -> Int -> Int
+        getListLength [] 0 = 0
+        getListLength [] i = i
+        getListLength (x:xs) i = getListLength xs (i+1)
+       
 
 ------------------------------------------------------------------------------
 -- Ex 5: define a function that checks if the given list is in
