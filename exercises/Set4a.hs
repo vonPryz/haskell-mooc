@@ -54,7 +54,9 @@ allEqual (x:xs) = all (==x) xs
 --   distinct [1,2] ==> True
 
 distinct :: Eq a => [a] -> Bool
-distinct = todo
+distinct xs
+    | length xs == length (nub xs) = True
+    | otherwise = False
 
 ------------------------------------------------------------------------------
 -- Ex 3: implement the function middle that returns the middle value
