@@ -118,11 +118,15 @@ rangeOf xs = (-) y x
 
 -- longest = todo
 
-:{
-longest :: Ord a => [[a]] -> [Int]
-longest xs = 
-    map length xs
-:}
+-- longest xs = filter ((== longestList) . length) xs
+-- :{
+longest :: Ord a => [[a]] -> [a]
+longest [[]] = []
+longest xs = (sort candidates) !! 0
+    where 
+        candidates = ([x | x <- xs, length x == longestList]) 
+        longestList = maximum $ map length xs
+-- :}
 
 ------------------------------------------------------------------------------
 -- Ex 6: Implement the function incrementKey, that takes a list of
