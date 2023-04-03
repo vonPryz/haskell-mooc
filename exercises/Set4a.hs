@@ -70,7 +70,6 @@ distinct xs
 --   middle 1 7 3        ==> 3
 
 -- middle = todo
--- middle :: Eq a => a -> a -> a -> a
 -- :{
 middle :: Ord a => a -> a -> a -> a
 middle a b c = srt !! 1
@@ -92,8 +91,14 @@ middle a b c = srt !! 1
 --   rangeOf [4,2,1,3]          ==> 3
 --   rangeOf [1.5,1.0,1.1,1.2]  ==> 0.5
 
-rangeOf :: [a] -> a
-rangeOf = todo
+-- rangeOf = todo
+rangeOf :: (Num a, Ord a) => [a] -> a
+rangeOf [] = 0
+rangeOf xs = (-) y x
+    where
+        srt = sort xs
+        x = head srt
+        y = last srt
 
 ------------------------------------------------------------------------------
 -- Ex 5: given a (non-empty) list of (non-empty) lists, return the longest
