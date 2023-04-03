@@ -34,8 +34,12 @@ import Data.Array
 -- PS. check out the error message you get with your implementation if
 -- you remove the Eq a => constraint from the type!
 
+-- allEqual xs = todo
+-- :{
 allEqual :: Eq a => [a] -> Bool
-allEqual xs = todo
+allEqual [] = True
+allEqual (x:xs) = all (==x) xs
+-- :}
 
 ------------------------------------------------------------------------------
 -- Ex 2: implement the function distinct which returns True if all
