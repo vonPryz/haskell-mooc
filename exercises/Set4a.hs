@@ -69,7 +69,15 @@ distinct xs
 --   middle 'b' 'a' 'c'  ==> 'b'
 --   middle 1 7 3        ==> 3
 
-middle = todo
+-- middle = todo
+-- middle :: Eq a => a -> a -> a -> a
+-- :{
+middle :: Ord a => a -> a -> a -> a
+middle a b c = srt !! 1
+    where
+        xs = a:b:c:[]
+        srt = sort xs
+-- :}
 
 ------------------------------------------------------------------------------
 -- Ex 4: return the range of an input list, that is, the difference
