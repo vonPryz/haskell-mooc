@@ -214,6 +214,8 @@ freqs :: (Eq a, Ord a) => [a] -> Map.Map a Int
 freqs [] = Map.empty
 freqs xs = Map.fromList ys
     where
+        -- Generates tuples with initial value of zero
+        -- needs updating with counts.
         uniqueValues = nub xs
         zeroes = zeros $ length uniqueValues 
         ys = zip uniqueValues zeroes 
