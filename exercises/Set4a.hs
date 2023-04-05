@@ -207,9 +207,23 @@ winner scores player1 player2
 -- Example:
 --   freqs [False,False,False,True]
 --     ==> Map.fromList [(False,3),(True,1)]
-
+-- freqs xs = todo
+-- :{
+-- import qualified Data.Map as Map
 freqs :: (Eq a, Ord a) => [a] -> Map.Map a Int
-freqs xs = todo
+freqs [] = Map.empty
+freqs xs = Map.fromList ys
+    where
+        uniqueValues = nub xs
+        zeroes = zeros $ length uniqueValues 
+        ys = zip uniqueValues zeroes 
+
+        zeros :: Int -> [Int]
+        zeros n = replicate n 0
+
+
+-- :}
+
 
 ------------------------------------------------------------------------------
 -- Ex 10: recall the withdraw example from the course material. Write a
