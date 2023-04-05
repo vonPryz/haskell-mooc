@@ -163,9 +163,10 @@ incrementKey key xs = [f x key | x <- xs]
 -- Hint! you can use the function fromIntegral to convert the list
 -- length to a Fractional
 
+-- average xs = todo
 average :: Fractional a => [a] -> a
-average xs = todo
-
+average [] = 0
+average xs = (sum xs) / (fromIntegral $ length xs) 
 ------------------------------------------------------------------------------
 -- Ex 8: given a map from player name to score and two players, return
 -- the name of the player with more points. If the players are tied,
