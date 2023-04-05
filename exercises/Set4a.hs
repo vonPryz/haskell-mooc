@@ -182,10 +182,20 @@ average xs = (sum xs) / (fromIntegral $ length xs)
 --     ==> "Lisa"
 --   winner (Map.fromList [("Mike",13607),("Bob",5899),("Lisa",5899)]) "Lisa" "Bob"
 --     ==> "Lisa"
-
+-- winner (fromList [("Jane",616),("Lisa",4456),("Mike",4456)]) "Lisa" "Mike"
+--     ==> "Lisa"
+-- winner scores player1 player2 = todo
+-- import qualified Data.Map as Map
+-- :{
 winner :: Map.Map String Int -> String -> String -> String
-winner scores player1 player2 = todo
-
+winner scores player1 player2
+    | snd p1 == snd p2 = fst p1
+    | snd p1 > snd p2 = fst p1
+    | snd p1 < snd p2 = fst p2
+    where
+        p1 = (player1, Map.findWithDefault 0 player1 scores)
+        p2 = (player2, Map.findWithDefault 0 player2 scores)
+-- :}
 ------------------------------------------------------------------------------
 -- Ex 9: compute how many times each value in the list occurs. Return
 -- the frequencies as a Map from value to Int.
