@@ -118,7 +118,6 @@ rangeOf xs = (-) y x
 
 -- longest = todo
 
--- longest xs = filter ((== longestList) . length) xs
 -- :{
 longest :: Ord a => [[a]] -> [a]
 longest [[]] = []
@@ -142,9 +141,16 @@ longest xs = (sort candidates) !! 0
 --   incrementKey True [(True,1),(False,3),(True,4)] ==> [(True,2),(False,3),(True,5)]
 --   incrementKey 'a' [('a',3.4)] ==> [('a',4.4)]
 
-incrementKey :: k -> [(k,v)] -> [(k,v)]
-incrementKey = todo
-
+-- incrementKey = todo
+-- :{
+incrementKey :: (Eq k, Num v) => k -> [(k,v)] -> [(k,v)]
+incrementKey _ [] = []
+incrementKey key xs = [f x key | x <- xs]
+    where
+        f x key
+            | fst x == key = (fst x, (+) 1 $ snd x)
+            | otherwise = (fst x, snd x)
+-- :}
 ------------------------------------------------------------------------------
 -- Ex 7: compute the average of a list of values of the Fractional
 -- class.
