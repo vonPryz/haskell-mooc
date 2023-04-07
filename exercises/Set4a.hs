@@ -208,24 +208,28 @@ winner scores player1 player2
 --   freqs [False,False,False,True]
 --     ==> Map.fromList [(False,3),(True,1)]
 -- freqs xs = todo
--- :{
--- import qualified Data.Map as Map
+
 freqs :: (Eq a, Ord a) => [a] -> Map.Map a Int
 freqs [] = Map.empty
-freqs xs = Map.fromList ys
+freqs xs = foldr updateKeys ys xs 
     where
-        -- Generates tuples with initial value of zero
-        -- needs updating with counts.
         uniqueValues = nub xs
-        zeroes = zeros $ length uniqueValues 
-        ys = zip uniqueValues zeroes 
+        
+        ys = Map.fromList $ zip uniqueValues (zeros $ length uniqueValues )
+
+        updateKeys :: (Ord a) => a -> Map.Map a Int -> Map.Map a Int
+        updateKeys x ys = Map.update incrementKeyValue x ys
+
+        incrementKeyValue :: Num a => a -> Maybe a
+        incrementKeyValue x = Just $ (+) 1 x 
 
         zeros :: Int -> [Int]
         zeros n = replicate n 0
 
-
--- :}
-
+-- This was another pretty tricky one. I started to build a list comprehension
+-- like ys' = [updateKeys x ys' | x <- xs], but never got its output to make
+-- much sense to Haskell. The idea was anyway to process the list and update
+-- the result map by each element, but that didn't work out.
 
 ------------------------------------------------------------------------------
 -- Ex 10: recall the withdraw example from the course material. Write a
