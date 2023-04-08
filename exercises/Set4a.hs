@@ -266,9 +266,13 @@ transfer from to amount bank = todo
 --   swap 2 3 (array (1,4) [(1,"one"),(2,"two"),(3,"three"),(4,"four")])
 --         ==> array (1,4) [(1,"one"),(2,"three"),(3,"two"),(4,"four")]
 
+-- swap i j arr = todo
 swap :: Ix i => i -> i -> Array i a -> Array i a
-swap i j arr = todo
-
+swap i j arr = arr // e' 
+    where
+        e1 = (j, arr ! i)
+        e2 = (i, arr ! j)
+        e' = e1:e2:[]
 ------------------------------------------------------------------------------
 -- Ex 12: given an Array, find the index of the largest element. You
 -- can assume the Array isn't empty.
