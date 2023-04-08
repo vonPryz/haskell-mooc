@@ -281,5 +281,7 @@ swap i j arr = arr // e'
 --
 -- Hint: check out Data.Array.indices or Data.Array.assocs
 
+-- maxIndex = todo
 maxIndex :: (Ix i, Ord a) => Array i a -> i
 maxIndex = todo
+
