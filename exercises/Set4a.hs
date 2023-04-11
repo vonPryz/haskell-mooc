@@ -256,8 +256,28 @@ freqs xs = foldr updateKeys ys xs
 --   transfer "Lisa" "Mike" 20 bank
 --     ==> fromList [("Bob",100),("Mike",50)]
 
+-- transfer from to amount bank = todo
 transfer :: String -> String -> Int -> Map.Map String Int -> Map.Map String Int
-transfer from to amount bank = todo
+transfer from to amount bank 
+    | amount < 0 = bank                 -- Negative amount, do nothing 
+    | Map.notMember from bank = bank    -- non-existing sender, do nothing
+    | Map.notMember to bank = bank      -- non-existing receiver, do nothing
+    | otherwise = 
+        if (-) senderSaldo amount < 0   -- Amount exceeds sender's saldo 
+        then 
+            bank 
+        else 
+            Map.insert to receiverSaldo' $ Map.insert from senderSaldo' bank 
+        where
+            senderSaldo = mInt $ Map.lookup from bank
+            senderSaldo' = senderSaldo - amount
+            receiverSaldo = mInt $ Map.lookup to bank
+            receiverSaldo' = (+) receiverSaldo amount
+
+            mInt :: Maybe Int -> Int
+            mInt (Just i) = i
+            mint Nothing = 0
+
 
 ------------------------------------------------------------------------------
 -- Ex 11: given an Array and two indices, swap the elements in the indices.
