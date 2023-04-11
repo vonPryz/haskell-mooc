@@ -303,5 +303,10 @@ swap i j arr = arr // e'
 
 -- maxIndex = todo
 maxIndex :: (Ix i, Ord a) => Array i a -> i
-maxIndex = todo
+maxIndex arr =
+    fst $ filter ((==maxVal).snd) (assocs arr)!!0
+    where
+        maxVal = maximum arr
+
+
 
